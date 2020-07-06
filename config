@@ -1,0 +1,11 @@
+- Ajout d'un mot de passe au compte root sur les vm linux
+
+- Ajouter les addition guest sur toute les vms
+
+- Installer le module scapy et pydnsbl sur la machine de sniffing en root
+
+- Mettre la VM de sniffing en mode promiscuité
+
+- Ne pas installer virtualbox via le dépot
+
+- Ubuntu 16.04
