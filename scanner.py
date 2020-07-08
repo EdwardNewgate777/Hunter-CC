@@ -59,6 +59,6 @@ class Scanner():
             if result >= 10:
                 self.conn.add_hash(self.hash)
                 return True
-
             else:
+                self.conn.add_hash(self.hash, False)
                 return False

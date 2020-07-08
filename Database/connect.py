@@ -5,11 +5,15 @@ class Connect_DB():
     def __init__(self):
         self.conn = sqlite3.connect('Database/Hunting.db')
 
-    def add_hash(self, hash):
+    def add_hash(self, hash, isMalware="True"):
         cur = self.conn.cursor()
 
-        req = "INSERT INTO C2(hash) VALUES(?)"
-        cur.execute(req, (hash,))
+        req = "INSERT INTO C2(hash, IsMalware) VALUES(?, ?)"
+        if isMalware:
+            cur.execute(req, (hash, 1))
+        else:
+            cur.execute(req, (hash, 0))
+
         self.conn.commit()
 
     def check_hash(self, hash):

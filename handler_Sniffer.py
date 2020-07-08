@@ -49,8 +49,8 @@ class Handler_Sniff(Thread):
         print("TROUVER !!!!\n")
         print("L'adresse du C&C est : {}".format(result))
         print("FIN")
-        #self.shutdown_vm()
-        #self.vm_restore()
+        self.shutdown_vm()
+        self.vm_restore()
         self.sandbox.shutdown_vm()
         self.sandbox.restore()
 
