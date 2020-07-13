@@ -46,9 +46,13 @@ class Handler_Sniff(Thread):
         cmd = 'VBoxManage guestcontrol {} run --username "{}" --password "{}" --exe "/usr/bin/python3" -- - "{}{}" "{}"'.format(self.vm, self.user, self.pwd, self.directory, self.name_sniff, self.target)
 
         result = self.execute(cmd)
-        print("TROUVER !!!!\n")
-        print("L'adresse du C&C est : {}".format(result))
-        print("FIN")
+
+        if len(result) == 1:
+            print("TROUVER !!!!\n")
+            print("L'adresse du C&C est : {}".format(result))
+            print("FIN")
+        else:
+            print("retest")
         self.shutdown_vm()
         self.vm_restore()
         self.sandbox.shutdown_vm()

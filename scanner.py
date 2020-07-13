@@ -34,12 +34,17 @@ class Scanner():
         files = {'file': ('myfile.exe', open(self.filename, 'rb'))}
         requests.post(SCAN_URL, files=files, params=params)
 
+    @property
     def isMalware(self):
         hash = self.get_hash()
 
-        if self.conn.check_hash(hash):
+        if self.conn.check_hash(hash, True):
             print("Virus connu")
             return True
+
+        elif self.conn.check_hash(hash, False):
+            return False
+
         else:
             params = {'apikey': API_KEY, 'resource': hash}
             response = requests.get(REPORT_URL, params=params)
@@ -48,7 +53,7 @@ class Scanner():
             if response_code == 0:
                 self.upload_malware()
                 while(True):
-                    sleep(20)
+                    sleep(30)
                     response = requests.get(REPORT_URL, params=params)
                     if response.json()['response_code'] == -2:
                         continue
@@ -59,6 +64,7 @@ class Scanner():
             if result >= 10:
                 self.conn.add_hash(self.hash)
                 return True
+
             else:
                 self.conn.add_hash(self.hash, False)
                 return False

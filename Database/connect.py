@@ -16,9 +16,14 @@ class Connect_DB():
 
         self.conn.commit()
 
-    def check_hash(self, hash):
+    def check_hash(self, hash, isMalware="True"):
         cur = self.conn.cursor()
-        req = "SELECT hash FROM C2 WHERE  hash=?"
+
+        if isMalware:
+            req = "SELECT hash FROM C2 WHERE  hash=? AND IsMalware=1"
+        else:
+            req = "SELECT hash FROM C2 WHERE  hash=?"
+
         result = cur.execute(req, (hash,))
 
         if result.fetchone():

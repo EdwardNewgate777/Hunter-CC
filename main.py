@@ -37,7 +37,7 @@ def main():
         exit()
 
     print("Chargement du malware...")
-    if scanner.isMalware():
+    if scanner.isMalware:
         print("Menace détectée")
         os = check_exec(scanner.get_filename())
 
